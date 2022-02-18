@@ -11,7 +11,7 @@ def getBuildUser() {
 
 
 pipeline {
-    agent any
+    agent {docker { image 'maven:3.6.3'}}
     
     environment {
         BUILD_USER = ''
@@ -36,7 +36,7 @@ pipeline {
         stage('Testing') {
             steps {
                 sh "npm install"
-                sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+                sh "npx cypress run --browser ${BROWSER} --spec "${SPEC}""
             }
         }
         
